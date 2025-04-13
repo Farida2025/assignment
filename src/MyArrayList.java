@@ -1,3 +1,7 @@
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+
 public class MyArrayList<T> implements MyList<T> {
     private Object[] data;
     private int size;
@@ -131,4 +135,25 @@ public class MyArrayList<T> implements MyList<T> {
     private void checkIndexForAdd(int index) {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @Override
+            public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();  // Необходимо добавление этого импорта
+                }
+                return (T) data[index++];
+            }
+        };
+    }
+
 }
