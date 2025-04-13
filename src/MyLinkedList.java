@@ -1,6 +1,11 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+
+/**
+ * A custom implementation of a doubly linked list.
+ * This class supports operations like adding, removing, and accessing elements from both ends.
+ */
 public class MyLinkedList<T> implements MyList<T> {
     private class MyNode {
         T data;
@@ -12,10 +17,17 @@ public class MyLinkedList<T> implements MyList<T> {
         }
     }
 
-    private MyNode head;
-    private MyNode tail;
-    private int size;
+    private MyNode head;    // Reference to the first node in the list
+    private MyNode tail;   // Reference to the last node in the list
+    private int size;      // Number of elements in the list
 
+
+
+
+    /**
+     * Adds an element at the end of the list.
+     * @param item The item to add
+     */
     @Override
     public void add(T item) {
         MyNode newNode = new MyNode(item);
@@ -70,21 +82,43 @@ public class MyLinkedList<T> implements MyList<T> {
         add(item);
     }
 
+
+    /**
+     * Returns the element at the specified index.
+     * @param index The index of the element
+     * @return The element at the given index
+     */
     @Override
     public T get(int index) {
         return getNode(index).data;
     }
 
+
+    /**
+     * Retrieves the first element of the list.
+     * @return The first element
+     */
     @Override
     public T getFirst() {
         return head != null ? head.data : null;
     }
 
+
+    /**
+     * Retrieves the last element of the list.
+     * @return The last element
+     */
     @Override
     public T getLast() {
         return tail != null ? tail.data : null;
     }
 
+
+
+    /**
+     * Removes the element at the specified index.
+     * @param index The index of the element to remove
+     */
     @Override
     public void remove(int index) {
         MyNode node = getNode(index);
@@ -174,6 +208,14 @@ public class MyLinkedList<T> implements MyList<T> {
         return size;
     }
 
+
+
+    /**
+     * Retrieves the node at the specified index.
+     * @param index The index of the node
+     * @return The node at the specified index
+     * @throws IndexOutOfBoundsException if the index is out of bounds
+     */
     private MyNode getNode(int index) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
         MyNode current;
@@ -191,6 +233,13 @@ public class MyLinkedList<T> implements MyList<T> {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
     }
 
+
+    /**
+     * This method returns an iterator that allows iterating over the elements of the linked list.
+     * The iterator starts from the head of the list and traverses the nodes one by one.
+     *
+     * @return An iterator that provides access to each element in the list in sequence.
+     */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {

@@ -177,6 +177,14 @@ public class MyArrayList<T> implements MyList<T> {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
     }
 
+
+
+    /**
+     * This method returns an iterator that allows iterating over the elements in the array list.
+     * The iterator starts from the first element and moves through the list sequentially.
+     *
+     * @return An iterator that provides access to each element in the list in sequence.
+     */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
