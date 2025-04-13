@@ -1,17 +1,26 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-
+/**
+ * This class implements a custom ArrayList. It dynamically grows as elements are added.
+ */
 public class MyArrayList<T> implements MyList<T> {
     private Object[] data;
     private int size;
     private static final int DEFAULT_CAPACITY = 10;
 
+    /**
+     * Constructor that initializes the data array with default capacity.
+     */
     public MyArrayList() {
         data = new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
+
+    /**
+     * Ensures the internal array has enough capacity to store new elements.
+     */
     private void ensureCapacity() {
         if (size >= data.length) {
             Object[] newData = new Object[data.length * 2];
@@ -20,18 +29,35 @@ public class MyArrayList<T> implements MyList<T> {
         }
     }
 
+
+    /**
+     * Adds an element to the end of the list.
+     * @param item The item to add
+     */
     @Override
     public void add(T item) {
         ensureCapacity();
         data[size++] = item;
     }
 
+
+    /**
+     * Sets the element at the specified index.
+     * @param index The index where the item is set
+     * @param item The item to set at the given index
+     */
     @Override
     public void set(int index, T item) {
         checkIndex(index);
         data[index] = item;
     }
 
+
+    /**
+     * Adds an element at the specified index.
+     * @param index The index at which the item is added
+     * @param item The item to add
+     */
     @Override
     public void add(int index, T item) {
         checkIndexForAdd(index);
@@ -40,6 +66,9 @@ public class MyArrayList<T> implements MyList<T> {
         data[index] = item;
         size++;
     }
+
+
+
 
     @Override
     public void addFirst(T item) {
@@ -128,10 +157,22 @@ public class MyArrayList<T> implements MyList<T> {
         return size;
     }
 
+
+    /**
+     * Checks if the given index is valid.
+     * @param index The index to check
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
     private void checkIndex(int index) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
     }
 
+
+    /**
+     * Checks if the given index is valid for adding an element.
+     * @param index The index to check
+     * @throws IndexOutOfBoundsException if the index is invalid
+     */
     private void checkIndexForAdd(int index) {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
     }
